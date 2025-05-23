@@ -4,24 +4,27 @@
 #define STUDENTS 5  //constant
 #define TESTS 13
 
+
+// User input names and scores for 5 students.
+//Calculate each student's average score
 void input_data(char names[STUDENTS][11], int results[STUDENTS][TESTS], float averages[STUDENTS]) {
-    int sum = 0;
-
-    for (int i = 0; i < STUDENTS; i++) {
+    for (int i = 0; i < STUDENTS; i++) {  
         scanf("%s", names[i]);
-
+        
+        int sum = 0;
         for (int j = 0; j < TESTS; j++) {
             scanf("%d", &results[i][j]);
             sum += results[i][j];
         }
 
-        averages[i] = (float)sum / TESTS;  // Type casting
-        sum = 0;
+        averages[i] = (float)sum / TESTS;  // casting
     }
 }
 
 
-float cal_average(float averages[STUDENTS]) {
+// Calculate class average 
+float find_class_average(float averages[STUDENTS]) {
+    
     float total = 0;
     for (int i = 0; i < STUDENTS; i++) {
         total += averages[i];
@@ -30,43 +33,50 @@ float cal_average(float averages[STUDENTS]) {
 }
 
 
+// Find the student with the highest average 
 int find_top_student(float averages[STUDENTS]) {
     int index = 0;
-    float highest = averages[0];
-
     for (int i = 1; i < STUDENTS; i++) {
-        if (averages[i] > highest) {
-            highest = averages[i];
+        if (averages[i] > averages[index]) {
             index = i;
         }
     }
     return index;
 }
 
-void underperform_student(char names[STUDENTS][11], float averages[STUDENTS], float totalAverage) {
+
+// Print names of students below the group average 
+void underperform_students(char names[STUDENTS][11], float averages[STUDENTS], float groupAverage) {
     for (int i = 0; i < STUDENTS; i++) {
-        if (averages[i] < totalAverage) {
-            names[i][0] = toupper(names[i][0]);
+        if (averages[i] < groupAverage) {
+            capitalize_letter(names[i]);
             printf("%s\n", names[i]);
         }
     }
 }
 
+
+// Capitalize the first letter of a name 
+void capitalize_letter(char name[]) {
+    name[0] = toupper(name[0]);
+}
+
+
+// Main function
 int main() {
-    char names[STUDENTS][11];  // 10+1
+    char names[STUDENTS][11];    // 10+1
     int results[STUDENTS][TESTS];
     float averages[STUDENTS];
 
     input_data(names, results, averages);
 
-    float totalAverage = cal_average(averages);
-    int toppStudent = find_top_student(averages);
+    float groupAverage = find_class_average(averages);
+    int topIndex = find_top_student(averages);
 
-    names[toppStudent][0] = toupper(names[toppStudent][0]);
-    printf("%s\n", names[toppStudent]);
+    capitalize_letter(names[topIndex]);
+    printf("%s\n", names[topIndex]);
 
-    underperform_student(names, averages, totalAverage);
+    underperform_students(names, averages, groupAverage);
 
     return 0;
 }
-
