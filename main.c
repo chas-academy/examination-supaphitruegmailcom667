@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define STUDENTS 5
+#define STUDENTS 5 // constant
 #define TESTS 13
 
 
@@ -17,7 +17,7 @@ void input_data(char names[STUDENTS][11], int results[STUDENTS][TESTS], float av
             sum += results[i][j];
         }
 
-        averages[i] = (float)sum / TESTS;
+        averages[i] = (float)sum / TESTS;  //casting
     }
 }
 
