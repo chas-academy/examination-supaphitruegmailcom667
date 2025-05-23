@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define STUDENTS 5  //constant
+#define STUDENTS 5
 #define TESTS 13
 
 
@@ -17,7 +17,7 @@ void input_data(char names[STUDENTS][11], int results[STUDENTS][TESTS], float av
             sum += results[i][j];
         }
 
-        averages[i] = (float)sum / TESTS;  // casting
+        averages[i] = (float)sum / TESTS;
     }
 }
 
@@ -45,6 +45,12 @@ int find_top_student(float averages[STUDENTS]) {
 }
 
 
+// Capitalize the first letter of a name 
+void capitalize_letter(char name[]) {
+    name[0] = toupper(name[0]);
+}
+
+
 // Print names of students below the group average 
 void underperform_students(char names[STUDENTS][11], float averages[STUDENTS], float groupAverage) {
     for (int i = 0; i < STUDENTS; i++) {
@@ -53,12 +59,6 @@ void underperform_students(char names[STUDENTS][11], float averages[STUDENTS], f
             printf("%s\n", names[i]);
         }
     }
-}
-
-
-// Capitalize the first letter of a name 
-void capitalize_letter(char name[]) {
-    name[0] = toupper(name[0]);
 }
 
 
